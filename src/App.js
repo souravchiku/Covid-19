@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Box, Typography, withStyles } from "@material-ui/core";
 import { Component } from "react";
-
+import Countries from "./components/Countries";
 import Cards from "./components/Cards";
 import { fetchData } from "./Service/Api";
 const style = {
@@ -56,6 +56,7 @@ class App extends Component {
         />
 
         <Cards data={data} />
+        <Countries />
       </Box>
     );
   }
