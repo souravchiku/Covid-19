@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchCountries } from "../Service/Api";
 import { Typography, NativeSelect } from "@material-ui/core";
 
-const Countries = () => {
+const Countries = ({ handleCountryChange }) => {
   const [countries, setCountries] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
@@ -19,7 +19,7 @@ const Countries = () => {
       >
         Reported Cases or Deaths by country or territatory
       </Typography>
-      <NativeSelect>
+      <NativeSelect onChange={(e) => handleCountryChange(e.target.value)}>
         <option value=""> United States</option>
         {countries.map((countries, i) => {
           return (

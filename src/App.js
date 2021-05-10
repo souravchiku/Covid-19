@@ -3,6 +3,7 @@ import { Box, Typography, withStyles } from "@material-ui/core";
 import { Component } from "react";
 import Countries from "./components/Countries";
 import Cards from "./components/Cards";
+import Chart from "./components/Chart";
 import { fetchData } from "./Service/Api";
 const style = {
   container: {
@@ -27,7 +28,8 @@ const style = {
 
 class App extends Component {
   state = {
-    data: {}
+    data: {},
+    country: ""
   };
 
   async componentDidMount() {
@@ -36,6 +38,14 @@ class App extends Component {
     this.setState({ data: result });
     console.log(this.state.data);
   }
+
+  handleCountryChange = async (country) => {
+    const result = await fetchData(country);
+
+    this.setState({ data: result, country: country });
+    console.log(result);
+  };
+
   render() {
     const { data } = this.state;
     return (
@@ -56,7 +66,8 @@ class App extends Component {
         />
 
         <Cards data={data} />
-        <Countries />
+        <Countries handleCountryChange={this.handleCountryChange} />
+        <Chart data={data} />
       </Box>
     );
   }
